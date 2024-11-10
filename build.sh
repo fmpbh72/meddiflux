@@ -4,7 +4,7 @@
 if [ "$1" == "prod" ]; then
   export REACT_APP_API_URL=https://prod.projeto-aws.com.br
 else
-  export REACT_APP_API_URL=https://hom.projeto-aws.com.br
+  export REACT_APP_API_URL=https://prod.projeto-aws.com.br
 fi
 
 # Instala as dependências e constrói o projeto
