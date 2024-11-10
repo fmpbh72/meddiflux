@@ -11,6 +11,7 @@ phases:
       - npm install --loglevel=error
       - echo Construindo para o ambiente $ENVIRONMENT
       - ./build.sh $ENVIRONMENT  # Passa a variável de ambiente
+      - echo $ENVIRONMENT
       - echo Rodando testes unitarios...
       - npm test
   

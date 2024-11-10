@@ -19,7 +19,8 @@ COPY build.sh .
 RUN chmod +x build.sh
 
 # Execute o script de construção
-RUN ./build.sh $ENVIRONMENT  # Usando a variável de ambiente
+RUN ./build.sh $ENVIRONMENT  
+# Usando a variável de ambiente
 
 RUN mv client/build build
 RUN rm -rf client/*
