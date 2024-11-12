@@ -30,7 +30,7 @@ function App() {
 
   //Listar Tarefa
   const fetchTask = async (uuid) => {
-    const res = await fetch(`${apiUrl}/api/tarefas/${uuid}`);
+    const res = await fetch(`${apiUrl}/api//${uuid}`);
     const data = await res.json();
     return data;
   };
