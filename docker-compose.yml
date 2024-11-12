@@ -1,6 +1,6 @@
 services:
   server:
-    #env_file: .env
+    env_file: .env
     build: .
     container_name: bia
     ports:
