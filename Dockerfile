@@ -20,7 +20,7 @@ RUN chmod +x build.sh
 
 # Execute o script de construção
 RUN ./build.sh $ENVIRONMENT  
-# Usando a variável de ambiente
+# Usando a variável de ambiente#
 
 RUN npm install --loglevel=error
 
