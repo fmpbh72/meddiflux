@@ -14,9 +14,10 @@
 #!/bin/bash
 
 # Verifica o argumento passado para definir a URL da API
-if [ "$1" == "prod" ]; then
-  export URL=http://prodfmp.us-east-1.elasticbeanstalk.com
-else
+
+URL=http://prodfmp.us-east-1.elasticbeanstalk.com
+
+if [ "$1" == "hom" ]; then
   export URL=http://homfmp.us-east-1.elasticbeanstalk.com
 fi
 
