@@ -1,8 +1,8 @@
 services:
   server:
-    env_file: .env
+    #env_file: .env
     build: .
-    container_name: meddiflux
+    container_name: bia
     ports:
       - 80:8080
     #environment:
