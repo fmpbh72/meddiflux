@@ -1,17 +1,16 @@
 #FROM public.ecr.aws/docker/library/node:21-slim
 FROM node:21-slim
-
 RUN npm install -g npm@latest --loglevel=error
-
-WORKDIR /usr/src/app
 
 # Instalar o curl
 RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
+WORKDIR /usr/src/app
+
 COPY package*.json ./
 
 RUN npm install --loglevel=error
-
+#Zebra
 COPY . .
 
 # Copie o script de construção para o contêiner
