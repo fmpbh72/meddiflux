@@ -23,8 +23,7 @@ RUN ./build.sh $ENVIRONMENT
 # Usando a variável de ambiente#
 
 #RUN npm install --loglevel=error
-
-RUN REACT_APP_API_URL=$REACT_APP_API_URL SKIP_PREFLIGHT_CHECK=true npm run build --prefix client
+#RUN REACT_APP_API_URL=$REACT_APP_API_URL SKIP_PREFLIGHT_CHECK=true npm run build --prefix client
 
 RUN mv client/build build
 RUN rm -rf client/*
