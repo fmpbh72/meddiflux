@@ -1,8 +1,10 @@
 #!/bin/bash
 
 # Verifica o argumento passado para definir a URL da API
+
 URL=http://prodfmp.us-east-1.elasticbeanstalk.com
-if [ "$1" =="fmp" ]; then
+
+if [ "ENVIRONMENT" == "fmp" ]; then
   export URL=http://homfmp.us-east-1.elasticbeanstalk.com
 fi
 
