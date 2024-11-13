@@ -28,5 +28,5 @@ jobs:
           elif [ "${{ github.ref }}" == "refs/heads/prod" ]; then
             docker build -t react_app_api_url --build-arg API_URL=http://prodfmp.us-east-1.elasticbeanstalk.com .
           fi
-      - name: Run Docker container
-        run: docker compose up -d
+      #- name: Run Docker container
+      #  run: docker compose up -d
