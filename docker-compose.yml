@@ -1,48 +1,23 @@
 services:
   server:
-    env_file: .env
+#   env_file: .env
     build: .
-    container_name: bia
-    ports:
-      - 80:8080
-    #environment:
-      #DB_HOST: db-hom-meddiflux-instance-1.c9qkwqag6uxj.us-east-1.rds.amazonaws.com
-      #DB_PORT: 5432
-      ## NAO PRECISA NO BOOTCAMP DAQUI PRA BAIXO ##
-      #DB_SECRET_NAME: rds!cluster-42d51256-37a1-433c-b7b8-868f6e67c357
-      #DB_REGION: us-east-1
-      # AWS_ACCESS_KEY_ID: 
-      # AWS_SECRET_ACCESS_KEY:
-      # DEBUG_SECRET: true 
-      # IS_LOCAL: true 
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://localhost:8080/api/versao"]
-    #   interval: 10s
-    #   timeout: 5s
-    #   retries: 3
-    #   start_period: 5s     
-npm install --loglevel=error
+    on:
+      push:
+        branches:
+          - hom
+          - prod
+        container_name: bia
+        ports:
+          - 80:8080
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-name: Build and Deploy
-
-on:
-  push:
-    branches:
-      - hom
-      - prod
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Build Docker image
-      run:
-        if [ "${{ github.ref }}" == "refs/heads/hom" ]; then
+      - name: Build Docker image
+        run:
+          if [ "${{ github.ref }}" == "refs/heads/hom" ]; then
           docker build -t REACT_APP_API_URL --build-arg API_URL=http://homfmp.us-east-1.elasticbeanstalk.com 
-        elif [ "${{ github.ref }}" == "refs/heads/prod" ]; then
+          elif [ "${{ github.ref }}" == "refs/heads/prod" ]; then
           docker build -t REACT_APP_API_URL --build-arg API_URL=http://prodfmp.us-east-1.elasticbeanstalk.com
-        fi
+          fi
