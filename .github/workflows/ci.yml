@@ -25,9 +25,9 @@ jobs:
     - name: Build Docker image
       run: |
         if [ "${{ github.ref }}" == "refs/heads/hom" ]; then
-          docker build -t meu-app-react --build-arg API_URL=http://homfmp.us-east-1.elasticbeanstalk.com .
+          docker build -t REACT_APP_API_URL --build-arg API_URL=http://homfmp.us-east-1.elasticbeanstalk.com .
         elif [ "${{ github.ref }}" == "refs/heads/prod" ]; then
-          docker build -t meu-app-react --build-arg API_URL=http://prodfmp.us-east-1.elasticbeanstalk.com .
+          docker build -t REACT_APP_API_URL --build-arg API_URL=http://prodfmp.us-east-1.elasticbeanstalk.com .
         fi
 
     #- name: Run Docker container
