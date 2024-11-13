@@ -11,7 +11,7 @@ const Header = ({ title, onAdd, showAdd }) => {
       {location.pathname === "/" && (
         <Button
           color={showAdd ? "green" : "black"}
-          text={showAdd ? "Close" : "Adicionar"}
+          text={showAdd ? "Close-Fechado" : "Adicionar"}
           onClick={onAdd}
         />
       )}
