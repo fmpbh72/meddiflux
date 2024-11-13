@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 import About from "./components/About";
-const apiUrl = process.env.REACT_APP_API_URL || "https://localhost:8080 " ;
+const apiUrl = process.env.react_app_api_url || "https://localhost:8080 " ;
 
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
