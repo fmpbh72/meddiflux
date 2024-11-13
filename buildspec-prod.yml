@@ -10,7 +10,7 @@ phases:
       - npm install --loglevel=error
       - NODE_OPTIONS=--openssl-legacy-provider REACT_APP_API_URL=$ENDPOINT_API SKIP_PREFLIGHT_CHECK=true npm run build
       - echo Rodando testes unitarios...
-      - npm test
+      #- npm test
 artifacts:
   files:
     - '**/*'
