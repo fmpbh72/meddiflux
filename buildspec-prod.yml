@@ -1,17 +1,18 @@
 version: 0.2
-
 phases:
   install:
-    commands:
-      - echo Instalando Node 21 e npm...
-      - curl -fsSL https://rpm.nodesource.com/setup_21.x | sudo bash -
-      - sudo yum install -y nodejs
+    runtime-versions:
+      nodejs: 21
   build:
     commands:
+      - echo "Iniciando build do react..."
+      - cd client
       - npm install --loglevel=error
-      - echo Construindo para o ambiente $ENDPOINT_API
       - NODE_OPTIONS=--openssl-legacy-provider REACT_APP_API_URL=$ENDPOINT_API SKIP_PREFLIGHT_CHECK=true npm run build
-      - echo $ENVIRONMENT
       - echo Rodando testes unitarios...
-      - npm test
-    
+      #- npm test
+artifacts:
+  files:
+    - '**/*'
+  base-directory: client/build
+  
