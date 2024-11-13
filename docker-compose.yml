@@ -3,9 +3,10 @@ services:
     build:
       context: .
       args:
-        - react_app_api_url=${API_URL}
+        - REACT_APP_API_URL=${API_URL}
     container_name: bia
     ports:
       - "80:8080"
     environment:
-      - react_app_api_url=${API_URL}
+      - REACT_APP_API_URL=${API_URL}
+     
