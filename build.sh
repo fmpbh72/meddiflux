@@ -1,33 +1,11 @@
+#!/bin/bash
+
+# Verifica o argumento passado para definir a URL da API
+#URL=http://prodfmp.us-east-1.elasticbeanstalk.com
+#if [ "EVENTO" == "homfmp" ]; then
+#  export URL=http://homfmp.us-east-1.elasticbeanstalk.com
+#fi
+# Instala as dependências e constrói o projeto
 npm install --loglevel=error
-
-name: Build and Deploy
-
-on:
-  push:
-    branches:
-      - hom
-      - prod
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '21'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build Docker image
-      run: |
-        if [ "${{ github.ref }}" == "refs/heads/hom" ]; then
-          docker build -t REACT_APP_API_URL --build-arg API_URL=http://homfmp.us-east-1.elasticbeanstalk.com .
-        elif [ "${{ github.ref }}" == "refs/heads/prod" ]; then
-          docker build -t REACT_APP_API_URL --build-arg API_URL=http://prodfmp.us-east-1.elasticbeanstalk.com .
-        fi
+- echo "$URL"
+REACT_APP_API_URL=$API_URL SKIP_PREFLIGHT_CHECK=true npm run build --prefix client
