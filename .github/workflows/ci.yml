@@ -1,6 +1,6 @@
 name: ci
 
-on:
+'on':
   push:
     branches:
       - hom
@@ -11,24 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build Docker image
-      run: |
-        if [ "${{ github.ref }}" == "refs/heads/hom" ]; then
-          docker build -t REACT_APP_API_URL --build-arg API_URL=http://homfmp.us-east-1.elasticbeanstalk.com .
-        elif [ "${{ github.ref }}" == "refs/heads/prod" ]; then
-          docker build -t REACT_APP_API_URL --build-arg API_URL=http://prodfmp.us-east-1.elasticbeanstalk.com .
-        fi
-
-    #- name: Run Docker container
-    #  run: docker-compose up -d
+      - name: Build Docker image
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/hom" ]; then
+            docker build -t REACT_APP_API_URL --build-arg API_URL=http://homfmp.us-east-1.elasticbeanstalk.com .
+          elif [ "${{ github.ref }}" == "refs/heads/prod" ]; then
+            docker build -t REACT_APP_API_URL --build-arg API_URL=http://prodfmp.us-east-1.elasticbeanstalk.com .
+          fi
+      #- name: Run Docker container
+      #  run: docker-compose up -d
