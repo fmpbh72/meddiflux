@@ -7,9 +7,9 @@
 #    export REACT_APP_API_URL=http://homfmp.us-east-1.elasticbeanstalk.com
 #fi.
 
-if [ "$ENVIROMENT" == "hom" ]; then 
+if [ "$ENVIRONMENT" == "prod" ]; then 
 export REACT_APP_API_URL=http://prodfmp.us-east-1.elasticbeanstalk.com
-elif [ "$1" == "prod" ]; then
+elif [ "$1" == "hom" ]; then
 export REACT_APP_API_URL=http://homfmp.us-east-1.elasticbeanstalk.com
 fi
 
@@ -21,7 +21,7 @@ fi
 
 echo "Usando a URL da API: $REACT_APP_API_URL"
 
-echo "Ambiente: $ENVIROMENT"
+echo "Ambiente: $ENVIRONMENT"
 
 # Instala as dependências e constrói o projeto
 npm install --loglevel=error
