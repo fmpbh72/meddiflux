@@ -1,28 +1,35 @@
 version: 0.2
 
 phases:
+  install:
+    commands:
+      - echo "Instalando dependências"
+      - npm install
   pre_build:
     commands:
-      - echo Fazendo login no ECR...
-      - aws --version
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 767397833843.dkr.ecr.us-east-1.amazonaws.com
-      - REPOSITORY_URI=767397833843.dkr.ecr.us-east-1.amazonaws.com/bia2
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - echo "Verificando o tipo de push ou pull request"
+      - echo "CODEBUILD_SOURCE_VERSION=$CODEBUILD_SOURCE_VERSION"
+      - |
+        # Verificando se é um commit direto no 'main' ou se é um pull request
+        if [[ "$CODEBUILD_SOURCE_VERSION" == "refs/heads/hom" ]]; then
+          # Push direto para 'main', ambiente de homologação
+          export ENVIRONMENT="hom"
+          export REACT_APP_API_URL="http://homfmp.us-east-1.elasticbeanstalk.com"
+        elif [[ "$CODEBUILD_SOURCE_VERSION" == *"refs/pull"* ]]; then
+          # Pull request para o 'main', ambiente de produção
+          export ENVIRONMENT="prod"
+          export REACT_APP_API_URL="http://prodfmp.us-east-1.elasticbeanstalk.com"
+        else
+          # Em caso de push para outro branch ou evento não esperado
+          export ENVIRONMENT="hom"  # Pode ser outro comportamento aqui
+          export REACT_APP_API_URL="http://homfmp.us-east-1.elasticbeanstalk.com"
+        fi
+      - echo "ENVIRONMENT definido como: $ENVIRONMENT"
+      - echo "REACT_APP_API_URL definido como: $REACT_APP_API_URL"
   build:
     commands:
-      - echo Build iniciado em `date`
-      - echo "Usando a URL da API: $REACT_APP_API_URL"
-      - echo Gerando imagem da BIA...
-      - docker build -t $REPOSITORY_URI:latest .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - echo "Rodando o build.sh com ENVIRONMENT=$ENVIRONMENT e REACT_APP_API_URL=$REACT_APP_API_URL"
+      - ./build.sh  # Executa o build.sh usando as variáveis de ambiente configuradas
   post_build:
     commands:
-      - echo Build finalizado com sucesso em `date`
-      - echo Fazendo push da imagem para o ECR...
-      - docker push $REPOSITORY_URI:latest
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - echo Gerando artefato da imagem para o ECS
-      - printf '[{"name":"bia","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-artifacts:
-  files: imagedefinitions.json
+      - echo "Build concluído"
