@@ -14,7 +14,7 @@ phases:
         if [[ "$CODEBUILD_SOURCE_VERSION" == "refs/heads/main" ]]; then
           # Push direto para 'main', ambiente de homologação
           export ENVIRONMENT="hom"
-          export REACT_APP_API_URL="https://hom.projeto-aws.com.br"
+          export REACT_APP_API_URL="https://prod.projeto-aws.com.br"
         elif [[ "$CODEBUILD_SOURCE_VERSION" == *"refs/pull"* ]]; then
           # Pull request para o 'main', ambiente de produção
           export ENVIRONMENT="prod"
