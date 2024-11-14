@@ -12,6 +12,7 @@ phases:
   build:
     commands:
       - echo Build iniciado em `date`
+      - echo "Usando a URL da API: $REACT_APP_API_URL"
       - echo Gerando imagem da BIA...
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
