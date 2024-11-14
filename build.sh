@@ -26,4 +26,6 @@ echo "Ambiente: $ENVIRONMENT"
 # Instala as dependências e constrói o projeto
 npm install --loglevel=error
 
+REACT_APP_API_URL=http://homfmp.us-east-1.elasticbeanstalk.com
+
 NODE_OPTIONS=--openssl-legacy-provider REACT_APP_API_URL=$REACT_APP_API_URL SKIP_PREFLIGHT_CHECK=true npm run build --prefix client
