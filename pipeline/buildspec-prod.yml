@@ -7,15 +7,29 @@ phases:
       - npm install
   pre_build:
     commands:
-      - echo "Configurando variável de ambiente com base no branch"
+      - echo "Verificando o tipo de push ou pull request"
+      - echo "CODEBUILD_SOURCE_VERSION=$CODEBUILD_SOURCE_VERSION"
       - |
-        if [ "$CODEBUILD_WEBHOOK_HEAD_REF" == "refs/heads/main" ]; then
-          export ENVIRONMENT="prod"
-        else
+        # Verificando se é um commit direto no 'main' ou se é um pull request
+        if [[ "$CODEBUILD_SOURCE_VERSION" == "refs/heads/main" ]]; then
+          # Push direto para 'main', ambiente de homologação
           export ENVIRONMENT="hom"
+          export REACT_APP_API_URL="https://hom.projeto-aws.com.br"
+        elif [[ "$CODEBUILD_SOURCE_VERSION" == *"refs/pull"* ]]; then
+          # Pull request para o 'main', ambiente de produção
+          export ENVIRONMENT="prod"
+          export REACT_APP_API_URL="https://prod.projeto-aws.com.br"
+        else
+          # Em caso de push para outro branch ou evento não esperado
+          export ENVIRONMENT="hom"  # Pode ser outro comportamento aqui
+          export REACT_APP_API_URL="https://hom.projeto-aws.com.br"
         fi
       - echo "ENVIRONMENT definido como:" $ENVIRONMENT
+      - echo "REACT_APP_API_URL definido como:" $REACT_APP_API_URL
   build:
     commands:
-      - echo "Rodando o build.sh com ENVIRONMENT=$ENVIRONMENT"
-      - ./build.sh
+      - echo "Rodando o build.sh com ENVIRONMENT=$ENVIRONMENT e REACT_APP_API_URL=$REACT_APP_API_URL"
+      - ./build.sh  # Executa o build.sh usando as variáveis de ambiente configuradas
+  post_build:
+    commands:
+      - echo "Build concluído"
