@@ -1,7 +1,8 @@
 services:
   server:
+    build: .
     env_file: .env
-    container_name: bia
+    container_name: meddiflux
     image: 767397833843.dkr.ecr.us-east-1.amazonaws.com/bia2:latest
     ports:
       - mode: ingress
