@@ -30,15 +30,3 @@ jobs:
           fi
       #- name: Run Docker container
       #  run: docker compose up -d
-service:
-  server: 
-  # env_file: .env
-    build:
-      context: .
-    args:
-      - REACT_APP_API_URL=${API_URL}
-    container_name: meddiflux
-    ports:
-      - "80:8080"
-    environment:
-      - REACT_APP_API_URL=${API_URL}

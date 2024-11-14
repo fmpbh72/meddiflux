@@ -7,5 +7,5 @@
 #fi
 # Instala as dependências e constrói o projeto
 npm install --loglevel=error
-echo ${API_URL}
-react_app_api_url=${API_URL} SKIP_PREFLIGHT_CHECK=true npm run build --prefix client
+echo $API_URL
+react_app_api_url=$API_URL SKIP_PREFLIGHT_CHECK=true npm run build --prefix client
