@@ -13,7 +13,7 @@ RUN npm install --loglevel=error
 COPY . .
 
 # Configura o build para utilizar o valor passado para REACT_APP_API_URL
-RUN NODE_OPTIONS=--openssl-legacy-provider REACT_APP_API_URL=$REACT_APP_API_URL SKIP_PREFLIGHT_CHECK=true npm run build --prefix client
+RUN NODE_OPTIONS=--openssl-legacy-provider REACT_APP_API_URL=https://prod.projeto-aws.com.br SKIP_PREFLIGHT_CHECK=true npm run build --prefix client
 
 RUN mv client/build build
 RUN rm -rf client/*
