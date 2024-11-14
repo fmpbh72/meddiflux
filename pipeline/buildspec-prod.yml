@@ -14,7 +14,7 @@ phases:
         else
           export ENVIRONMENT="hom"
         fi
-      - echo "ENVIRONMENT definido como: $ENVIRONMENT"
+      - echo "ENVIRONMENT definido como:" $ENVIRONMENT
   build:
     commands:
       - echo "Rodando o build.sh com ENVIRONMENT=$ENVIRONMENT"

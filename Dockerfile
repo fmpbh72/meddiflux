@@ -25,7 +25,3 @@ RUN mv build client/
 EXPOSE 8080
 
 CMD [ "npm", "start" ]
-
-EXPOSE 8080
-
-CMD ["npm", "start"]
