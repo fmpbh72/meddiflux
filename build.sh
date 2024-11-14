@@ -5,7 +5,7 @@
 #    export REACT_APP_API_URL=http://prodfmp.us-east-1.elasticbeanstalk.com
 #else
 #    export REACT_APP_API_URL=http://homfmp.us-east-1.elasticbeanstalk.com
-#fi
+#fi.
 
 if [ "$1" == "hom" ]; then 
 export REACT_APP_API_URL=http://prodfmp.us-east-1.elasticbeanstalk.com
