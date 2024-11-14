@@ -20,10 +20,10 @@ COPY build.sh .
 RUN chmod +x build.sh
 
 # Execute o script de construção   
-RUN ./build.sh $API_URL
+RUN ./build.sh $REACT_APP_API_URL
 
 # Usando a variável de ambiente#
-RUN react_app_api_url=$API_URL SKIP_PREFLIGHT_CHECK=true npm run build --prefix client
+# RUN react_app_api_url=$API_URL SKIP_PREFLIGHT_CHECK=true npm run build --prefix client
 
 RUN mv client/build build
 RUN rm -rf client/*
