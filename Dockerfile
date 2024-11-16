@@ -20,7 +20,6 @@ COPY build.sh .
 RUN chmod +x build.sh
 
 # Execute o script de construção   
-
 RUN ./build.sh $REACT_APP_API_URL
 
 # Usando a variável de ambiente#

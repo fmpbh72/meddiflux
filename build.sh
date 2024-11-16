@@ -9,6 +9,8 @@
 #fi
 
 # Define a URL com base no ambiente
+ENVIROMENT=$ENVIRONMENT
+
 if [ "$ENVIRONMENT" == "hom" ]; then
 REACT_APP_API_URL="http://homfmp.us-east-1.elasticbeanstalk.com"
 else [ "$ENVIRONMENT" == "prod" ]; then
