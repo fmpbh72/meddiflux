@@ -3,9 +3,9 @@
 echo "Ambiente: $ENVIRONMENT"
 
 if [ $ENVIRONMENT == "prod" ]; then 
-export REACT_APP_API_URL=http://prodfmp.us-east-1.elasticbeanstalk.com
+export ARG SERVIDOR=http://prodfmp.us-east-1.elasticbeanstalk.com
 else
-export REACT_APP_API_URL=http://homfmp.us-east-1.elasticbeanstalk.com
+export ARG SERVIDOR=http://homfmp.us-east-1.elasticbeanstalk.com
 fi
 
 echo "Usando a URL da API: $REACT_APP_API_URL"
