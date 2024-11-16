@@ -8,23 +8,12 @@
 #export REACT_APP_API_URL=http://homfmp.us-east-1.elasticbeanstalk.com
 #fi
 
-# Verifica se o argumento foi passado
-if [ -z "$1" ]; then
-  echo "Uso: $1 "
-  exit 1
-fi
-
-# Define a variável de ambiente
-ENVIRONMENT=$1
-
 # Define a URL com base no ambiente
 if [ "$ENVIRONMENT" == "hom" ]; then
-export REACT_APP_API_URL="http://homfmp.us-east-1.elasticbeanstalk.com"
+REACT_APP_API_URL="http://homfmp.us-east-1.elasticbeanstalk.com"
 elif [ "$ENVIRONMENT" == "prod" ]; then
-export REACT_APP_API_URL="http://prodfmp.us-east-1.elasticbeanstalk.com"
+REACT_APP_API_URL="http://prodfmp.us-east-1.elasticbeanstalk.com"
 else
-  echo "Ambiente inválido. Use 'hom' ou 'prod'."
-  exit 1
 fi
 
 # Exibe a URL
